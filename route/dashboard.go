@@ -1,21 +1,35 @@
 package dashboard
 
 import (
-	"fmt"
-	"io/ioutil"
+	"html/template"
 	"net/http"
+
+	"github.com/featTheB/anifan-card/private"
 )
 
+var tmpl = template.Must(template.ParseFiles(
+	"views/main.html",
+	"views/components/header.html",
+	"views/components/footer.html",
+	"views/components/card.html"))
+
+type pageSetup struct {
+	Header  private.Header
+	Footer  private.Footer
+	Title   string
+	CardIds []string
+}
+
+// Page generate the main page
 func Page(w http.ResponseWriter, r *http.Request) {
-
-	resp, err := http.Get("https://pokeapi.co/api/v2/pokemon/ditto/")
-
-	if err == nil {
-		body, err := ioutil.ReadAll(resp.Body)
-		if err == nil {
-			fmt.Fprintf(w, string(body))
-		}
-
-	}
-	defer resp.Body.Close()
+	cardIdentifier := []string{"card-1", "card-2", "card-3", "card-4", "card-5", "card-6", "card-7", "card-8", "card-9"}
+	data := pageSetup{
+		Title:   "3 By 3 of Anon",
+		CardIds: cardIdentifier,
+		Header: private.Header{
+			CSS:   "static/css/main.css",
+			Title: "3By3"},
+		Footer: private.Footer{
+			Js: "/static/js/main.js"}}
+	tmpl.Execute(w, data)
 }

@@ -10,7 +10,11 @@ import (
 	"strings"
 )
 
-func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (interface{}, error) {
+/**
+func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error)
+Fetch a graphQl Api
+*/
+func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error) {
 	/**
 	if nbVariable := NbOccurence(pQuery, "$"); nbVariable != len(pVariables) {
 		return -1, errors.New("the number of variable in query don't match the variables pass")
@@ -53,7 +57,7 @@ func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterfa
 }
 
 /**
-NbOccurence(s string, pSubstring string) int
+NbOccurence (s string, pSubstring string) int
 find the number of occurence of the substring in the string
 */
 func NbOccurence(s string, pSubstring string) int {
@@ -67,7 +71,4 @@ func NbOccurence(s string, pSubstring string) int {
 			return 0
 		}
 	}
-}
-func IsQuery(pQuery string) {
-
 }

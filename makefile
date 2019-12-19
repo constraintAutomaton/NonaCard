@@ -7,6 +7,7 @@ DEP = dep
 BINARY_NAME=3_by_3
 BINARY_UNIX=$(BINARY_NAME)_unix
 TEST_PATH = ./pkg/test
+NPM = npm
     
 all: test build
 build: 
@@ -24,4 +25,5 @@ deps:
 	${DEP} ensure
 init:
 	${DEP} init
+	${NPM} i
             
