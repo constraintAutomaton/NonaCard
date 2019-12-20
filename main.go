@@ -2,26 +2,36 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
-	dashboard "github.com/featTheB/anifan-card/route"
+	middleware "github.com/featTheB/anifan-card/middleware"
+	route "github.com/featTheB/anifan-card/route"
 	"github.com/gorilla/mux"
 )
 
+// UseSpecific add middleware to specific route
+
 func main() {
 	r := mux.NewRouter()
-	api := r.PathPrefix("/api").Subrouter()
+	api := r.PathPrefix("/api/v1").Subrouter()
 
 	static := r.PathPrefix("/static/")
 	fs := http.FileServer(http.Dir("assets/"))
 
 	static.Handler(http.StripPrefix("/static/", fs))
 
-	r.HandleFunc("/", dashboard.Page).Methods("GET")
+	r.HandleFunc("/", route.Dashboard).Methods("GET")
 
 	api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Welcome the API")
+		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+		fmt.Fprintf(w, "<h1>Welcome the API</h1>")
 	}).Methods("GET")
 
+	searchAnime := api.PathPrefix("/search/anime").Subrouter()
+	searchAnime.Use(middleware.SearchAnimeAnilist)
+	searchAnime.HandleFunc("", route.SearchAnime).Methods("GET")
+
+	log.Println("server started at 8080")
 	http.ListenAndServe(":8080", r)
 }

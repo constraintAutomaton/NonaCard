@@ -7,6 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chartjs": "^0.3.24"
+    "chartjs": "^0.3.24",
+    "sass": "^1.23.7"
   }
 }

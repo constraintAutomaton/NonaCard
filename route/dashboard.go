@@ -1,4 +1,4 @@
-package dashboard
+package route
 
 import (
 	"html/template"
@@ -21,7 +21,7 @@ type pageSetup struct {
 }
 
 // Page generate the main page
-func Page(w http.ResponseWriter, r *http.Request) {
+func Dashboard(w http.ResponseWriter, r *http.Request) {
 	cardIdentifier := []string{"card-1", "card-2", "card-3", "card-4", "card-5", "card-6", "card-7", "card-8", "card-9"}
 	data := pageSetup{
 		Title:   "3 By 3 of Anon",

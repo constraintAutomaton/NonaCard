@@ -1,22 +1,23 @@
+.card {
+  text-align: center;
+  width: 30vw;
+  height: 25vh;
+}
+
 .card-container {
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
-  justify-items: center;
 }
+
 .intro {
   display: flex;
   flex-direction: column;
+  align-content: center;
   justify-content: center;
-  align-items: center;
 }
-.card {
-  width: 30vw;
-  height: 20vh;
-  background-color: red;
-  border:solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.intro h1 {
   text-align: center;
 }
+
+/*# sourceMappingURL=main.css.map */

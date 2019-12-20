@@ -20,7 +20,6 @@ normalize if connected 2
 patreon 2 
 p2p 2
 ---
-graph ani staff/studio/actor
 
 ---
 time line nier/drakengard
