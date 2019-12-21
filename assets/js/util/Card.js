@@ -1,4 +1,5 @@
 import ApiInterface from "./ApiInterface.js"
+import SearchComponent from "./SearchComponent.js";
 export default class Card{
     
     constructor(p_el,p_position){
@@ -14,6 +15,8 @@ export default class Card{
         const data= await this.getApiEngine().searchAnime("dragon maid");
         this.data = data[0];
         this.getEl().querySelector(".card__img").src= this.data["coverImage"]["medium"];
-        debugger;
+        const searchComponent = document.createElement("search-component");
+        this.getEl().appendChild(searchComponent);
+        //debugger;
     }
 }

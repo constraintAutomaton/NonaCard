@@ -20,7 +20,7 @@ type pageSetup struct {
 	CardIds []string
 }
 
-// Page generate the main page
+// Dashboard generate the main page
 func Dashboard(w http.ResponseWriter, r *http.Request) {
 	cardIdentifier := []string{"card-1", "card-2", "card-3", "card-4", "card-5", "card-6", "card-7", "card-8", "card-9"}
 	data := pageSetup{
