@@ -14,6 +14,8 @@ const querySearchAnilist = `query ($name: String) {
 	Page {
 	  media(search: $name, type: ANIME) {
 		id
+		idMal
+		siteUrl
 		title {
 		  romaji
 		  english
@@ -38,7 +40,7 @@ func SearchAnimeAnilist(next http.Handler) http.Handler {
 			log.Println(m)
 
 		} else {
-			b, err := json.Marshal(*res)
+			b, err := json.Marshal((*res)["data"].(map[string]interface{})["Page"].(map[string]interface{})["media"])
 			if err == nil {
 				w.Header().Set("Content-Type", "text/json; application/json")
 				io.WriteString(w, string(b))
