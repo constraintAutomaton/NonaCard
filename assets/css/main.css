@@ -1,10 +1,11 @@
 .card {
-  text-align: center;
   width: 230px;
-  height: 191.6666666667px;
+  height: 183.3333333333px;
+  display: flex;
+  flex-direction: columns;
+  justify-content: center;
+  align-content: center;
   border: solid black;
-  margin: 5px;
-  margin-top: 5px;
   border-radius: 30px;
   background-size: 100% 100%;
   -webkit-background-size: cover;
@@ -24,18 +25,19 @@ anime-card:hover {
 
 .card-container {
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  justify-items: center;
+  align-content: center;
+  grid-row-gap: 5px;
+  grid-column-gap: 50px;
 }
 
 .intro {
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  flex-direction: columns;
   justify-content: center;
-}
-.intro h1 {
-  text-align: center;
+  align-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */
