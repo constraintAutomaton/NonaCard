@@ -1,6 +1,5 @@
 {{template "header" .Header}}
 <section class="intro">
-  <h1>{{.Title}}</h1>
   <div class="card-container">
     {{range $el:=.CardIds}} {{template "card" $el}} {{end}}
   </div>

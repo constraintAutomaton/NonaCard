@@ -1,7 +1,25 @@
 .card {
   text-align: center;
-  width: 30vw;
-  height: 25vh;
+  width: 230px;
+  height: 191.6666666667px;
+  border: solid black;
+  margin: 5px;
+  margin-top: 5px;
+  border-radius: 30px;
+  background-size: 100% 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+anime-card {
+  opacity: 0;
+  display: flex;
+}
+
+anime-card:hover {
+  opacity: 1;
 }
 
 .card-container {

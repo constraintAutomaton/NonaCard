@@ -1,8 +1,10 @@
-import Card from "./util/Card.js"
+import "./util/AnimeCard.js";
 
 const cardsElement = Array.from(document.querySelectorAll(".card"));
-const cards = [];
-for (let i in cardsElement){
-    cards.push(new Card(cardsElement[i],i+1));
-}
+
+cardsElement.forEach((card, i) => {
+  const animeCard = document.createElement("anime-card");
+  card.appendChild(animeCard);
+});
+console.log(document.querySelector("anime-card").data);
 //debugger;

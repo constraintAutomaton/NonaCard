@@ -22,6 +22,7 @@ const querySearchAnilist = `query ($name: String) {
 		}
 		coverImage {
 		  medium
+		  large
 		}
 	  }
 	}

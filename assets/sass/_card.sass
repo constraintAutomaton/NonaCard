@@ -1,4 +1,28 @@
+$space-card:5px
+$image-width:230px
+$image-heigh:345px
+
+@mixin cover()
+    -webkit-background-size: cover
+    -moz-background-size: cover
+    -o-background-size: cover
+    background-size: cover
 .card
     text-align: center
-    width: 30vw
-    height: 25vh
+    width: ($image-width / 1)
+    height: ($image-heigh / 1.8)
+
+    border: solid black
+    margin: $space-card
+    margin-top: $space-card
+    border-radius: 30px
+    background-size: 100% 100%
+    @include cover()
+
+anime-card
+    opacity: 0
+    display: flex
+
+anime-card:hover
+    opacity: 1
+    
