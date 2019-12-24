@@ -1,26 +1,18 @@
 .card {
   width: 230px;
   height: 183.3333333333px;
-  display: flex;
-  flex-direction: columns;
-  justify-content: center;
-  align-content: center;
   border: solid black;
   border-radius: 30px;
-  background-size: 100% 100%;
+}
+
+anime-card {
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-anime-card {
-  opacity: 0;
-  display: flex;
-}
-
-anime-card:hover {
-  opacity: 1;
 }
 
 .card-container {
@@ -38,6 +30,10 @@ anime-card:hover {
   flex-direction: columns;
   justify-content: center;
   align-content: center;
+}
+
+card-form {
+  align-self: center;
 }
 
 /*# sourceMappingURL=main.css.map */

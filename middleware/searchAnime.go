@@ -24,6 +24,7 @@ const querySearchAnilist = `query ($name: String) {
 		  medium
 		  large
 		}
+		description
 	  }
 	}
   }`

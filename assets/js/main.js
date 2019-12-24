@@ -1,11 +1,10 @@
-import "./util/AnimeCard.js";
-
+import "./component/AnimeCard.js";
+import "./component/CardForm.js";
 const cardsElement = Array.from(document.querySelectorAll(".card"));
-
 cardsElement.forEach((card, i) => {
   const animeCard = document.createElement("anime-card");
+  animeCard.id = `card-${i}`;
   card.appendChild(animeCard);
 });
-document.querySelector("anime-card").data = { test: 33 };
-console.log(document.querySelector("anime-card").data);
-//debugger;
+const form = document.createElement("card-form");
+document.querySelector(".intro").appendChild(form);
