@@ -1,4 +1,8 @@
 {{template "header" .Header}}
+<div>
+  <button id="save">Save</button>
+  <button id="load">Load</button>
+</div>
 <section class="intro">
   <div class="card-container">
     {{range $el:=.CardIds}} {{template "card" $el}} {{end}}

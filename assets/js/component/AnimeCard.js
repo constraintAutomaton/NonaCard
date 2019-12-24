@@ -1,4 +1,8 @@
 import "./CardForm.js";
+/**
+ * AnimeCard
+ * Html tag that show anime card
+ */
 export default class AnimeCard extends HTMLElement {
   static get observedAttributes() {
     return ["data"];
@@ -19,6 +23,9 @@ export default class AnimeCard extends HTMLElement {
     shadow.appendChild(linkElem);
     shadow.appendChild(this.container);
     this.container.querySelector("button").onclick = this.ShowForm.bind(this); //this.search.bind(this);
+  }
+  connectedCallback() {
+    this.setAttribute("data", JSON.stringify({}));
   }
   async ShowForm() {
     const cardForm = document.querySelector("card-form");
