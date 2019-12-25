@@ -10,8 +10,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// UseSpecific add middleware to specific route
-
 func main() {
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api/v1").Subrouter()
@@ -31,6 +29,10 @@ func main() {
 	searchAnime := api.PathPrefix("/search/anime").Subrouter()
 	searchAnime.Use(middleware.SearchAnimeAnilist)
 	searchAnime.HandleFunc("", route.SearchAnime).Methods("GET")
+
+	getUser := api.PathPrefix("/user").Subrouter()
+	getUser.Use(middleware.GetUserInfoAnilist)
+	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
 
 	log.Println("server started at 8080")
 	http.ListenAndServe(":8080", r)

@@ -9,12 +9,13 @@ import (
 	"github.com/featTheB/anifan-card/pkg/clientGraphQl"
 )
 
-const url string = "https://graphql.anilist.co"
+const urlAnilist string = "https://graphql.anilist.co"
 const querySearchAnilist = `query ($name: String) {
 	Page {
 	  media(search: $name, type: ANIME) {
 		id
 		idMal
+		averageScore
 		siteUrl
 		title {
 		  romaji
@@ -25,6 +26,9 @@ const querySearchAnilist = `query ($name: String) {
 		  large
 		}
 		description
+		tags{
+			description
+		  }
 	  }
 	}
   }`
@@ -36,7 +40,7 @@ func SearchAnimeAnilist(next http.Handler) http.Handler {
 		variables := map[string]string{
 			"name": q}
 		res := new(map[string]interface{})
-		m, err := clientGraphQl.Fetch(url, querySearchAnilist, variables, res)
+		m, err := clientGraphQl.Fetch(urlAnilist, querySearchAnilist, variables, res)
 		if err != nil {
 			log.Println(err)
 			log.Println(m)
