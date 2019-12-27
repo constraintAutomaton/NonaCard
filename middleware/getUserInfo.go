@@ -36,24 +36,6 @@ const queryGetUserInfoAnilist = `query UserInfo($user: String) {
 		  }
 		}
 	  }
-	  favourites {
-		anime {
-		  edges {
-			node {
-			  averageScore
-			  title {
-				userPreferred
-			  }
-			  siteUrl
-			  coverImage {
-				medium
-				large
-			  }
-			  description
-			}
-		  }
-		}
-	  }
 	}
   }
   `
@@ -61,22 +43,47 @@ const queryGetUserInfoAnilist = `query UserInfo($user: String) {
 // GetUserInfoAnilist get the user info from the anilist api
 func GetUserInfoAnilist(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
 		vars := mux.Vars(r)
 		variables := map[string]string{
 			"user": vars["user"]}
-		res := new(map[string]interface{})
-		m, err := clientGraphQl.Fetch(urlAnilist, queryGetUserInfoAnilist, variables, res)
+		var res UserAnilistJSON
+
+		m, err := clientGraphQl.Fetch(urlAnilist, queryGetUserInfoAnilist, variables, &res)
 		if err != nil {
 			log.Println(err)
 			log.Println(m)
 
 		} else {
-			b, err := json.Marshal((*res)["data"].(map[string]interface{})["User"])
+			b, err := json.Marshal(res.formatAnilistUserInfo())
 			if err == nil {
 				w.Header().Set("Content-Type", "text/json; application/json")
 				io.WriteString(w, string(b))
 			}
 		}
+
 		next.ServeHTTP(w, r)
 	})
+}
+
+func (u UserAnilistJSON) formatAnilistUserInfo() FormatedAnilistUserInfo {
+	user := u.Data.User
+	statistics := user.Statistics.Anime
+	tags := statistics.Tags
+	formatedTag := make([]TagsFormated, len(tags), len(tags))
+	for i, tag := range tags {
+		formatedTag[i] = TagsFormated{Count: tag.Count,
+			Name:        tag.Tag.Description,
+			Description: tag.Tag.Description}
+	}
+	res := FormatedAnilistUserInfo{
+		SiteURL: user.SiteURL,
+		Avatar:  user.Avatar,
+		Statistics: statisticsFormated{MeanScore: statistics.MeanScore,
+			StandardDeviation: statistics.StandardDeviation,
+			MinutesWatched:    statistics.MinutesWatched,
+			Count:             statistics.Count,
+			Scores:            statistics.Scores,
+			Tags:              formatedTag}}
+	return res
 }

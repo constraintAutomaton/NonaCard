@@ -11,10 +11,10 @@ import (
 )
 
 /**
-func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error)
+func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error)
 Fetch a graphQl Api
 */
-func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error) {
+func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface interface{}) (int, error) {
 	/**
 	if nbVariable := NbOccurence(pQuery, "$"); nbVariable != len(pVariables) {
 		return -1, errors.New("the number of variable in query don't match the variables pass")
@@ -32,7 +32,7 @@ func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterfa
 	if err != nil {
 		return -1, errors.New("Unable to create the JSON from the variables and the query")
 	}
-	resp, err := http.Post(pUrl, "application/json", bytes.NewBuffer(b))
+	resp, err := http.Post(pURL, "application/json", bytes.NewBuffer(b))
 	if err != nil {
 		return -1, errors.New("Unable to post to the api")
 	}
@@ -48,9 +48,11 @@ func Fetch(pUrl string, pQuery string, pVariables map[string]string, pRepInterfa
 	if err != nil {
 		return -1, errors.New("Unable to read the response")
 	}
-	err = json.Unmarshal(m, &pRepInterface)
+	//log.Println(string(m))
+
+	err = json.Unmarshal(m, pRepInterface)
 	if err != nil {
-		return -1, errors.New("Unable to convert the response to JSON")
+		return -1, err //errors.New("Unable to convert the response to JSON")
 	}
 	return 1, nil
 
