@@ -3,9 +3,13 @@
   <button id="save">Save</button>
   <button id="load">Load</button>
 </div>
+<div>
+  <input id="user">
+</div>
 <section class="intro">
   <div class="card-container">
     {{range $el:=.CardIds}} {{template "card" $el}} {{end}}
   </div>
 </section>
+<div class="ct-chart ct-perfect-fourth"></div>
 {{template "footer" .Footer}}
