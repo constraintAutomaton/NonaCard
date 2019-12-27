@@ -34,7 +34,9 @@ export default class AnimeCard extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "data": {
-        this.changeCardImage();
+        if (newValue !== "{}") {
+          this.changeCardImage();
+        }
         break;
       }
     }

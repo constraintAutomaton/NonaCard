@@ -15,4 +15,14 @@ export default class ApiInterface {
       return false;
     }
   }
+  async getUserInfo(p_user) {
+    const url = `${this.getRootUrl()}/user/${p_user}`;
+    const rep = await fetch(url);
+    if (rep.ok) {
+      return await rep.json();
+    } else {
+      console.error(rep.status);
+      return false;
+    }
+  }
 }

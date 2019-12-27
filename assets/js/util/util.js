@@ -13,6 +13,8 @@ export const load = () => {
   const arrayCard = Array.from(document.querySelectorAll("anime-card"));
   const data = JSON.parse(myStorage.getItem("data"));
   arrayCard.forEach(el => {
-    el.setAttribute("data", data[el.id]);
+    if (data[el.id] !== "{}") {
+      el.setAttribute("data", data[el.id]);
+    }
   });
 };
