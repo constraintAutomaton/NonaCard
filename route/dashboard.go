@@ -30,6 +30,6 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 			CSS:   "static/css/main.css",
 			Title: "3By3"},
 		Footer: private.Footer{
-			Js: "/static/js/main.js"}}
+			Js: "/static/dist/main.js"}}
 	tmpl.Execute(w, data)
 }

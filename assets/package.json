@@ -2,11 +2,20 @@
   "name": "anifan-card",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "./js/main.js",
-  "scripts": {},
+  "scripts": {
+    "start": "webpack --save"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-
+    "chartist": "^0.11.4",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   }
 }
