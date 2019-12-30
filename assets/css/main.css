@@ -23,6 +23,7 @@ anime-card {
   align-content: center;
   grid-row-gap: 5px;
   grid-column-gap: 50px;
+  grid-area: main;
 }
 
 .intro {
@@ -30,10 +31,23 @@ anime-card {
   flex-direction: columns;
   justify-content: center;
   align-content: center;
+  justify-self: stretch;
+}
+
+.empty {
+  grid-area: empty;
 }
 
 card-form {
-  align-self: center;
+  grid-area: side-form;
+}
+
+.core {
+  display: grid;
+  grid-template-columns: 20vw auto 20vw;
+  grid-template-areas: "empty main side-form";
+  justify-content: space-between;
+  width: 100vw;
 }
 
 /*# sourceMappingURL=main.css.map */

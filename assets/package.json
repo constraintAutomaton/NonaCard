@@ -5,7 +5,7 @@
   "private": true,
   "main": "./js/main.js",
   "scripts": {
-    "start": "webpack --save"
+    "start": "webpack --watch --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-cli": "^3.3.10"
   }
 }

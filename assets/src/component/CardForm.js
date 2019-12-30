@@ -13,9 +13,12 @@ export default class CardForm extends HTMLElement {
     linkElem.setAttribute("href", "static/css/cardForm.css");
     this.apiEngine = new ApiInterface();
     this.container = document.createElement("div");
+    this.container.classList.add("container");
     this.container.innerHTML = `
-    <input></input>
-    <button>Exit</button>
+    <div>
+      <input>
+      <button>Exit</button>
+    </div>
     <div class="result"></div>
     `;
     shadow.appendChild(linkElem);
@@ -26,16 +29,16 @@ export default class CardForm extends HTMLElement {
     );
   }
   connectedCallback() {
-    this.container.style.display = "none";
+    this.container.style.opacity = "0";
   }
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "card": {
         // don't show if clicked again
         if (oldValue === newValue || newValue === "null") {
-          this.container.style.display = "none";
+          this.container.style.opacity = "0";
         } else {
-          this.container.style.display = "inline";
+          this.container.style.opacity = "1";
           this.emptyResult();
         }
         break;
