@@ -14,4 +14,17 @@ div {
   border-radius: 30px;
 }
 
+.container {
+  background-color: #97949473;
+  box-shadow: 2px 2px 2px black;
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  border: 0.5px solid black;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 /*# sourceMappingURL=animeCard.css.map */

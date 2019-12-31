@@ -1,18 +1,6 @@
 .card {
   width: 230px;
   height: 183.3333333333px;
-  border: solid black;
-  border-radius: 30px;
-}
-
-anime-card {
-  height: 100%;
-  width: 100%;
-  border-radius: 30px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 .card-container {
@@ -21,7 +9,7 @@ anime-card {
   grid-template-rows: repeat(3, auto);
   justify-items: center;
   align-content: center;
-  grid-row-gap: 5px;
+  grid-row-gap: 25px;
   grid-column-gap: 50px;
   grid-area: main;
 }

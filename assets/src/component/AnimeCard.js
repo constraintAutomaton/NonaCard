@@ -15,6 +15,7 @@ export default class AnimeCard extends HTMLElement {
     linkElem.setAttribute("rel", "stylesheet");
     linkElem.setAttribute("href", "static/css/animeCard.css");
     this.container = document.createElement("div");
+    this.container.classList.add("container");
     this.container.innerHTML = `
     <div id="info">
       <button>OK</button>
@@ -46,6 +47,7 @@ export default class AnimeCard extends HTMLElement {
     const image = data["coverImage"]["large"];
     const container = this.container;
     container.style.background = `url(${image}) no-repeat center`;
+    container.style.boxShadow = `2px 2px 2px ${data["coverImage"]["color"]}`;
   }
 }
 customElements.define("anime-card", AnimeCard);

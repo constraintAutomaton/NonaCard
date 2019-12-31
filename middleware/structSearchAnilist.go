@@ -27,6 +27,7 @@ type title struct {
 type coverImage struct {
 	Medium string `json:"medium"`
 	Large  string `json:"large"`
+	Color  string `json:"color"`
 }
 
 //Tags of the anime

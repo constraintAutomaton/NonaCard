@@ -15,11 +15,11 @@ export default class CardForm extends HTMLElement {
     this.container = document.createElement("div");
     this.container.classList.add("container");
     this.container.innerHTML = `
-    <div>
+    <div class="form">
       <input>
       <button>Exit</button>
     </div>
-    <div class="result"></div>
+    <div class="results"></div>
     `;
     shadow.appendChild(linkElem);
     shadow.appendChild(this.container);
@@ -47,7 +47,7 @@ export default class CardForm extends HTMLElement {
   }
   async showSearchResult() {
     const query = this.container.querySelector("input").value;
-    const resultSection = this.container.querySelector(".result");
+    const resultSection = this.container.querySelector(".results");
     resultSection.innerHTML = "";
     if (query != "") {
       const data = await this.apiEngine.searchAnime(query);
@@ -55,9 +55,9 @@ export default class CardForm extends HTMLElement {
         const result = document.createElement("div");
         const title =
           el.title.english != null ? el.title.english : el.title.romaji;
-        result.innerHTML = `<span>${title}<span>`;
+        result.innerHTML = `<span class="result">${title}<span>`;
         // set the select anime in the card
-        result.querySelector("span").onclick = () => {
+        result.querySelector(".result").onclick = () => {
           const card = document.querySelector(`#${this.getAttribute("card")}`);
           card.setAttribute("data", JSON.stringify(el));
         };
@@ -68,7 +68,7 @@ export default class CardForm extends HTMLElement {
     }
   }
   emptyResult() {
-    const resultSection = this.container.querySelector(".result");
+    const resultSection = this.container.querySelector(".results");
     resultSection.innerHTML = "";
     this.container.querySelector("input").value = "";
   }
