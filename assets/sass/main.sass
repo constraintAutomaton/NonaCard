@@ -5,9 +5,11 @@
     grid-template-rows: repeat(3, auto)
     justify-items: center
     align-content: center
-    grid-row-gap: 25px
-    grid-column-gap: 50px
+    grid-row-gap: 0.8vw
+    grid-column-gap: 5vw
     grid-area: main
+    position: relative
+    top:1.5vh
 .intro
     display: flex
     flex-direction: columns
@@ -16,12 +18,15 @@
     justify-self: stretch
 .empty
     grid-area: empty
+.nav
+    grid-area: nav
 card-form
     grid-area: side-form
 .core
     display: grid
     grid-template-columns: 20vw auto 20vw
-    grid-template-areas:"empty main side-form"
+    grid-template-rows: repeat(2, auto)
+    grid-template-areas:"nav nav nav""empty main side-form"
     justify-content: space-between
     width: 100vw
     

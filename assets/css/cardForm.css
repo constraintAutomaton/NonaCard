@@ -28,7 +28,7 @@ button {
 }
 
 .results {
-  height: 30vh;
+  height: 25vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }

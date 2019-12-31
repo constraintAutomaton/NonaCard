@@ -1,5 +1,6 @@
 $height-form:30vh
 $width-form:18vw
+$result-substract:5vh
 @mixin noSelect()
     -webkit-touch-callout: none
     -webkit-user-select: none
@@ -23,7 +24,7 @@ button
 .result:hover
     background-color: pink
 .results
-    height: $height-form 
+    height: $height-form - $result-substract
     overflow-y: scroll
     overflow-x: hidden
 .container

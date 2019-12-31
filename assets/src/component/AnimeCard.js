@@ -46,7 +46,7 @@ export default class AnimeCard extends HTMLElement {
     const data = JSON.parse(this.getAttribute("data"));
     const image = data["coverImage"]["large"];
     const container = this.container;
-    container.style.background = `url(${image}) no-repeat center`;
+    container.style.backgroundImage = `url(${image})`;
     container.style.boxShadow = `2px 2px 2px ${data["coverImage"]["color"]}`;
   }
 }
