@@ -29,4 +29,13 @@ div {
   background-position: center center;
 }
 
+.option-card {
+  height: 30px;
+  width: auto;
+}
+
+.card-selected {
+  border: 0.5vh solid red;
+}
+
 /*# sourceMappingURL=animeCard.css.map */

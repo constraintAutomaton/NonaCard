@@ -37,6 +37,7 @@ export default class CardForm extends HTMLElement {
         // don't show if clicked again
         if (oldValue === newValue || newValue === "null") {
           this.container.style.opacity = "0";
+          this.exitForm();
         } else {
           this.container.style.opacity = "1";
           this.emptyResult();
@@ -73,6 +74,8 @@ export default class CardForm extends HTMLElement {
     this.container.querySelector("input").value = "";
   }
   exitForm() {
+    const card = document.querySelector(`#${this.getAttribute("card")}`);
+    card.setAttribute("selected", "false");
     this.setAttribute("card", null);
   }
 }

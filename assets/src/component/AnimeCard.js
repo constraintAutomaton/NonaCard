@@ -5,7 +5,7 @@ import "./CardForm.js";
  */
 export default class AnimeCard extends HTMLElement {
   static get observedAttributes() {
-    return ["data"];
+    return ["data", "selected"];
   }
   constructor() {
     super();
@@ -16,20 +16,23 @@ export default class AnimeCard extends HTMLElement {
     linkElem.setAttribute("href", "static/css/animeCard.css");
     this.container = document.createElement("div");
     this.container.classList.add("container");
+    this.container.draggable = true;
     this.container.innerHTML = `
     <div id="info">
-      <button>OK</button>
+      <img class="option-card" alt="options" src="static/images/gear.svg"/>
     <div>
     `;
     shadow.appendChild(linkElem);
     shadow.appendChild(this.container);
-    this.container.querySelector("button").onclick = this.ShowForm.bind(this); //this.search.bind(this);
+    this.container.querySelector("#info").onclick = this.ShowForm.bind(this); //this.search.bind(this);
   }
   connectedCallback() {
     this.setAttribute("data", JSON.stringify({}));
   }
   async ShowForm() {
+    this.container.classList.add("card-selected");
     const cardForm = document.querySelector("card-form");
+    this.setAttribute("selected", "true");
     cardForm.setAttribute("card", this.id);
   }
   attributeChangedCallback(name, oldValue, newValue) {
@@ -39,6 +42,11 @@ export default class AnimeCard extends HTMLElement {
           this.changeCardImage();
         }
         break;
+      }
+      case "selected": {
+        if (newValue === "false") {
+          this.container.classList.remove("card-selected");
+        }
       }
     }
   }

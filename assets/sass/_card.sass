@@ -1,7 +1,6 @@
-$image-width:230px
-$image-heigh:326px
-$card-radius:30px
-$ration-card:1.8
+$image-heigh:29vh
+$card-radius:1vh
+$ratio-w-h:1.42
 
 @mixin cover()
     -webkit-background-size: cover
@@ -9,7 +8,7 @@ $ration-card:1.8
     -o-background-size: cover
     background-size: cover
 .card
-    width: ($image-width / $ration-card)
-    height: ($image-heigh / $ration-card)
+    width: $image-heigh/$ratio-w-h
+    height: $image-heigh
    
 
