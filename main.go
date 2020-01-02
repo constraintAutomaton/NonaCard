@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	middleware "github.com/featTheB/anifan-card/middleware"
-	route "github.com/featTheB/anifan-card/route"
+	middleware "github.com/constraintAutomaton/nonaCard/middleware"
+	route "github.com/constraintAutomaton/nonaCard/route"
 	"github.com/gorilla/mux"
 )
 

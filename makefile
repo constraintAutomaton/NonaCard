@@ -34,5 +34,7 @@ dev:
 	${FRESH}
 dev-css:
 	${SASS} ${SASS_DIR}:${CSS_DIR}
+dev-js:
+	cd assets && sudo ${NPM} start
 
             

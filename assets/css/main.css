@@ -32,7 +32,7 @@
   grid-template-rows: repeat(3, auto);
   justify-items: center;
   align-content: center;
-  grid-row-gap: 0.7vw;
+  grid-row-gap: 2vh;
   grid-column-gap: 5vw;
   grid-area: main;
   position: relative;

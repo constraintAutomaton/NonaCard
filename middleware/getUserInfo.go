@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/featTheB/anifan-card/pkg/clientGraphQl"
+	"github.com/constraintAutomaton/nonaCard/pkg/clientGraphQl"
 	"github.com/gorilla/mux"
 )
 

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/featTheB/anifan-card/pkg/clientGraphQl"
+	"github.com/constraintAutomaton/nonaCard/pkg/clientGraphQl"
 )
 
 func main() {

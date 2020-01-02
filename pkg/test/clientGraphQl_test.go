@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	clientGraphQl "github.com/featTheB/anilist-user-analysis/pkg/clientGraphQl"
+	clientGraphQl "github.com/constraintAutomaton/anilist-user-analysis/pkg/clientGraphQl"
 )
 
 func TestNbOccurence(t *testing.T) {

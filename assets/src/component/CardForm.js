@@ -37,7 +37,9 @@ export default class CardForm extends HTMLElement {
         // don't show if clicked again
         if (oldValue === newValue || newValue === "null") {
           this.container.style.opacity = "0";
-          this.exitForm();
+          if (newValue !== "null") {
+            this.exitForm();
+          }
         } else {
           this.container.style.opacity = "1";
           this.emptyResult();
