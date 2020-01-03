@@ -62,6 +62,7 @@ export default class CardForm extends HTMLElement {
         // set the select anime in the card
         result.querySelector(".result").onclick = () => {
           const card = document.querySelector(`#${this.getAttribute("card")}`);
+          el["card"] = this.getAttribute("card");
           card.setAttribute("data", JSON.stringify(el));
         };
         resultSection.appendChild(result);

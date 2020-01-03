@@ -27,12 +27,12 @@ export default class AnimeCard extends HTMLElement {
 
     this.container.querySelector("#info").onclick = this.ShowForm.bind(this);
 
-    this.container.ondragstart = this.dragstart_handler.bind(this);
-    this.container.ondrop = this.drop_handler.bind(this);
-    this.container.ondragover = this.dragover_handler.bind(this);
+    this.ondragstart = this.dragstart_handler;
+    this.ondrop = this.drop_handler;
+    this.ondragover = this.dragover_handler;
   }
   connectedCallback() {
-    this.setAttribute("data", JSON.stringify({}));
+    this.setAttribute("data", JSON.stringify({ card: this.id }));
   }
   async ShowForm() {
     const cards = Array.from(document.querySelectorAll("anime-card"));
@@ -63,10 +63,16 @@ export default class AnimeCard extends HTMLElement {
   }
   changeCardImage() {
     const data = JSON.parse(this.getAttribute("data"));
-    const image = data["coverImage"]["large"];
-    const container = this.container;
-    container.style.backgroundImage = `url(${image})`;
-    container.style.boxShadow = `2px 2px 2px ${data["coverImage"]["color"]}`;
+    if ("coverImage" in data) {
+      const image = data["coverImage"]["large"];
+      const container = this.container;
+      container.style.backgroundImage = `url(${image})`;
+      container.style.boxShadow = `2px 2px 2px ${data["coverImage"]["color"]}`;
+    } else {
+      const container = this.container;
+      container.style.backgroundImage = "";
+      container.style.boxShadow = "2px 2px 2px black";
+    }
   }
   dragstart_handler(ev) {
     //ev.preventDefault();
@@ -81,12 +87,12 @@ export default class AnimeCard extends HTMLElement {
   drop_handler(ev) {
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text/plain");
-
-    const idTarget = ev.rangeParent.id;
-    debugger;
-    ev.target.parentNode.id = this.id;
-    ev.target.parentNode.setAttribute("data", data);
-    this.id = idTarget;
+    const jsonData = JSON.parse(data);
+    const prevData = this.getAttribute("data");
+    ev.target.setAttribute("data", data);
+    document
+      .querySelector(`#${jsonData["card"]}`)
+      .setAttribute("data", prevData);
   }
 }
 customElements.define("anime-card", AnimeCard);
