@@ -30,6 +30,7 @@ export default class AnimeCard extends HTMLElement {
     this.ondragstart = this.dragstart_handler;
     this.ondrop = this.drop_handler;
     this.ondragover = this.dragover_handler;
+    this.ondragend = this.dragend_handler;
   }
   connectedCallback() {
     this.setAttribute("data", JSON.stringify({ card: this.id }));
@@ -50,7 +51,7 @@ export default class AnimeCard extends HTMLElement {
     switch (name) {
       case "data": {
         if (newValue !== "{}") {
-          this.changeCardImage();
+          this.applyChanges();
         }
         break;
       }
@@ -61,7 +62,7 @@ export default class AnimeCard extends HTMLElement {
       }
     }
   }
-  changeCardImage() {
+  applyChanges() {
     const data = JSON.parse(this.getAttribute("data"));
     if ("coverImage" in data) {
       const image = data["coverImage"]["large"];
@@ -79,20 +80,32 @@ export default class AnimeCard extends HTMLElement {
     const data = this.getAttribute("data");
     ev.dataTransfer.setData("text/plain", data);
     ev.dataTransfer.dropEffect = "move";
+    this.style.opacity = "0";
   }
   dragover_handler(ev) {
     ev.preventDefault();
     ev.dataTransfer.dropEffect = "move";
   }
+  // switch card
   drop_handler(ev) {
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text/plain");
     const jsonData = JSON.parse(data);
     const prevData = this.getAttribute("data");
-    ev.target.setAttribute("data", data);
+    const prevJson = JSON.parse(prevData);
+
+    const cardAttribute = jsonData["card"];
+    jsonData["card"] = prevJson["card"];
+    prevJson["card"] = cardAttribute;
+
+    debugger;
+    this.setAttribute("data", JSON.stringify(jsonData));
     document
-      .querySelector(`#${jsonData["card"]}`)
-      .setAttribute("data", prevData);
+      .querySelector(`#${prevJson["card"]}`)
+      .setAttribute("data", JSON.stringify(prevJson));
+  }
+  dragend_handler() {
+    this.style.opacity = "1";
   }
 }
 customElements.define("anime-card", AnimeCard);
