@@ -1,1 +1,1 @@
-web: go build && go run main.go
+web: /app/bin/nonacard
