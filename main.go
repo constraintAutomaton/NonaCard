@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	middleware "github.com/constraintAutomaton/nonaCard/middleware"
 	route "github.com/constraintAutomaton/nonaCard/route"
@@ -35,5 +36,13 @@ func main() {
 	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
 
 	log.Println("server started at 8080")
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(getPort(), r)
+}
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Println("[-] No PORT environment variable detected. Setting to ", port)
+	}
+	return ":" + port
 }
