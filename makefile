@@ -24,8 +24,6 @@ clean:
 run:
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME)
-deps:
-	${DEP} ensure
 init:
 	${GOCMD} mod init
 	${GOCMD} build
