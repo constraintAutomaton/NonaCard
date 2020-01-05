@@ -1,6 +1,6 @@
 export default class ApiInterface {
   constructor() {
-    const _rootUrl = "http://localhost:8080/api/v1/";
+    const _rootUrl = `${window.location.href}/api/v1/`;
     this.getRootUrl = () => {
       return _rootUrl;
     };

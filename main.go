@@ -13,6 +13,7 @@ import (
 
 func main() {
 	r := mux.NewRouter()
+	r.Use(mux.CORSMethodMiddleware(r))
 	api := r.PathPrefix("/api/v1").Subrouter()
 
 	static := r.PathPrefix("/static/")
@@ -35,7 +36,6 @@ func main() {
 	getUser.Use(middleware.GetUserInfoAnilist)
 	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
 
-	log.Println("server started at 8080")
 	http.ListenAndServe(getPort(), r)
 }
 func getPort() string {
@@ -43,6 +43,8 @@ func getPort() string {
 	if port == "" {
 		port = "8080"
 		log.Println("[-] No PORT environment variable detected. Setting to ", port)
+	} else {
+		log.Println("Starting app at ", port)
 	}
 	return ":" + port
 }
