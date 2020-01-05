@@ -1,1 +1,1 @@
-web: /app/bin/nonacard
+web: /app/bin/nonaCard
