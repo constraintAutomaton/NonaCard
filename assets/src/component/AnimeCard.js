@@ -98,7 +98,6 @@ export default class AnimeCard extends HTMLElement {
     jsonData["card"] = prevJson["card"];
     prevJson["card"] = cardAttribute;
 
-    debugger;
     this.setAttribute("data", JSON.stringify(jsonData));
     document
       .querySelector(`#${prevJson["card"]}`)

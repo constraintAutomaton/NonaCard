@@ -3,8 +3,7 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
-DEP = dep
-BINARY_NAME=3_by_3
+BINARY_NAME=NoncaCard
 BINARY_UNIX=$(BINARY_NAME)_unix
 TEST_PATH = ./pkg/test
 NPM = npm
@@ -28,7 +27,8 @@ run:
 deps:
 	${DEP} ensure
 init:
-	${DEP} init
+	${GOCMD} mod init
+	${GOCMD} build
 	${NPM} i
 dev:
 	${FRESH}
