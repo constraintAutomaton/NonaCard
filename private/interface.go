@@ -13,3 +13,8 @@ type Header struct {
 type Footer struct {
 	Js string
 }
+
+// HeaderDashboard paramter of the header of the dashboard page
+type HeaderDashboard struct {
+	OauthLink string
+}

@@ -1,1 +1,1 @@
-
+You have to set the env variable. look at the .env_example.

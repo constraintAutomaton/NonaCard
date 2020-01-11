@@ -43,6 +43,7 @@ export default class CardForm extends HTMLElement {
         } else {
           this.container.style.opacity = "1";
           this.emptyResult();
+          this.container.querySelector("input").focus();
         }
         break;
       }

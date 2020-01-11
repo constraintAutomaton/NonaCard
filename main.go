@@ -9,9 +9,13 @@ import (
 	middleware "github.com/constraintAutomaton/nonaCard/middleware"
 	route "github.com/constraintAutomaton/nonaCard/route"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Print("No .env file found")
+	}
 	r := mux.NewRouter()
 	r.Use(mux.CORSMethodMiddleware(r))
 	api := r.PathPrefix("/api/v1").Subrouter()
