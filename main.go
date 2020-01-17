@@ -26,6 +26,7 @@ func main() {
 	static.Handler(http.StripPrefix("/static/", fs))
 
 	r.HandleFunc("/", route.Dashboard).Methods("GET")
+	r.HandleFunc("/login", route.Login).Methods("GET")
 
 	api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
