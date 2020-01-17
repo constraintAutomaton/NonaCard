@@ -14,7 +14,7 @@ SASS_DIR = assets/sass
     
 all: test build
 build: 
-	$(GOBUILD) -o $(BINARY_NAME) -v
+	${GOCMD} build
 test: 
 	$(GOTEST) -v ${TEST_PATH}
 clean: 
@@ -25,9 +25,8 @@ run:
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME)
 init:
-	${GOCMD} mod init
 	${GOCMD} build
-	${NPM} i
+	cd assets && ${NPM} i
 dev:
 	${FRESH}
 dev-css:
