@@ -4,3 +4,4 @@ tmp
 3_by_3
 assets/node_modules/
 .env
+Dockerfile
