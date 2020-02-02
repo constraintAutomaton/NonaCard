@@ -14,7 +14,7 @@ import (
 func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error)
 Fetch a graphQl Api
 */
-func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface interface{}) (int, error) {
+func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface interface{}, pAuthorization ...string) (int, error) {
 	/**
 	if nbVariable := NbOccurence(pQuery, "$"); nbVariable != len(pVariables) {
 		return -1, errors.New("the number of variable in query don't match the variables pass")

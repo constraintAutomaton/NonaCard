@@ -21,7 +21,7 @@ const oauthLink string = "https://anilist.co/api/v2/oauth/token"
 
 // Login log or register the user
 func Login(w http.ResponseWriter, r *http.Request) {
-	defer http.Redirect(w, r, "", http.StatusSeeOther)
+
 	token := r.URL.Query()["code"][0]
 	jwt, err := getJwt(token)
 	if err != nil {
@@ -30,6 +30,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		log.Println(jwt)
 		getUserInfo(jwt)
 	}
+	http.Redirect(w, r, "", http.StatusSeeOther)
 }
 
 func getJwt(pToken string) (string, error) {
