@@ -1,4 +1,5 @@
-![Go](https://github.com/constraintAutomaton/NonaCard/workflows/Go/badge.svg?branch=master)
+![Build](https://github.com/constraintAutomaton/NonaCard/workflows/Build/badge.svg)
+
 # NonaCard
 
 An anime 3X3 builder linked with the anilist API
