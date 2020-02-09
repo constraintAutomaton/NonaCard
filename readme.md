@@ -1,5 +1,4 @@
 ![Build](https://github.com/constraintAutomaton/NonaCard/workflows/Build/badge.svg)
-![Lint](https://github.com/constraintAutomaton/NonaCard/workflows/Lint/badge.svg)
 
 # NonaCard
 
