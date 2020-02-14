@@ -15,6 +15,7 @@ SASS_DIR = assets/sass
 all: test build
 build: 
 	${GOCMD} build
+	cd assets && ${NPM} i
 test: 
 	$(GOTEST) -v ${TEST_PATH}
 clean: 
