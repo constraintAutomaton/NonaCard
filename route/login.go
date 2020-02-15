@@ -28,7 +28,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	} else {
 		log.Println(jwt)
-		getUserInfo(jwt)
 	}
 	http.Redirect(w, r, "", http.StatusSeeOther)
 }
@@ -53,7 +52,4 @@ func getJwt(pToken string) (string, error) {
 		return "", err
 	}
 	return string(body), err
-}
-func getUserInfo(jwt string) (string, error) {
-	return "", nil
 }

@@ -34,5 +34,7 @@ dev-css:
 	${SASS} ${SASS_DIR}:${CSS_DIR}
 dev-js:
 	cd assets && sudo ${NPM} start
+run-frontEnd:
+	cd assets && sudo ${NPM} i && ${NPM} start
 
             

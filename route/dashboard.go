@@ -9,22 +9,6 @@ import (
 	"github.com/constraintAutomaton/nonaCard/private"
 )
 
-var tmpl = template.Must(template.ParseFiles(
-	"views/main.html",
-	"views/components/header.html",
-	"views/components/footer.html",
-	"views/components/dashboard/card.html",
-	"views/components/dashboard/footer.html",
-	"views/components/dashboard/header.html",
-))
-
-type pageSetup struct {
-	Header          private.Header
-	Footer          private.Footer
-	HeaderDashboard private.HeaderDashboard
-	CardIds         []string
-}
-
 // Dashboard generate the main page
 func Dashboard(w http.ResponseWriter, r *http.Request) {
 
@@ -39,5 +23,24 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 			Js: "/static/dist/main.js"},
 		HeaderDashboard: private.HeaderDashboard{
 			OauthLink: aouthLink}}
-	tmpl.Execute(w, data)
+	err := tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	}
+}
+
+var tmpl = template.Must(template.ParseFiles(
+	"views/main.html",
+	"views/components/header.html",
+	"views/components/footer.html",
+	"views/components/dashboard/card.html",
+	"views/components/dashboard/footer.html",
+	"views/components/dashboard/header.html",
+))
+
+type pageSetup struct {
+	Header          private.Header
+	Footer          private.Footer
+	HeaderDashboard private.HeaderDashboard
+	CardIds         []string
 }

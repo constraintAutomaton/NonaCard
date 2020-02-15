@@ -1,5 +1,6 @@
 package session
 
+/**
 import (
 	"time"
 
@@ -58,3 +59,4 @@ type DBInterface interface {
 type Token interface {
 	IsValid() bool
 }
+*/

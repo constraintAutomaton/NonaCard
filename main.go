@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 
 	middleware "github.com/constraintAutomaton/nonaCard/middleware"
 	route "github.com/constraintAutomaton/nonaCard/route"
@@ -13,6 +14,7 @@ import (
 )
 
 func main() {
+	initializeFrontEnd()
 	if err := godotenv.Load(".env"); err != nil {
 		log.Print("No .env file found")
 	}
@@ -41,7 +43,11 @@ func main() {
 	getUser.Use(middleware.GetUserInfoAnilist)
 	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
 
-	http.ListenAndServe(getPort(), r)
+	err := http.ListenAndServe(getPort(), r)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
 func getPort() string {
 	port := os.Getenv("PORT")
@@ -52,4 +58,17 @@ func getPort() string {
 		log.Println("Starting app at ", port)
 	}
 	return ":" + port
+}
+
+func initializeFrontEnd() {
+	cmd := exec.Command("git", "submodule update --init --recursive")
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("make", "run-frontEnd")
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
