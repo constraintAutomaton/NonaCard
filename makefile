@@ -31,14 +31,12 @@ init:
 	cd assets && ${NPM} i
 dev:
 	make submodules
-	make run-frontEnd
+	make dev-frontEnd
 	${FRESH}
-dev-css:
-	${SASS} ${SASS_DIR}:${CSS_DIR}
-dev-js:
-	cd assets && sudo ${NPM} start
 run-frontEnd:
 	cd assets && sudo ${NPM} i && ${NPM} start
+dev-frontEnd:
+	cd assets && sudo ${NPM} i && ${NPM} run-script dev 
 submodules:
 	git submodule update --init --recursive
 
