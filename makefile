@@ -14,8 +14,9 @@ SASS_DIR = assets/sass
     
 all: test build
 build: 
+	make submodules
+	make run-frontEnd
 	${GOCMD} build
-	cd assets && ${NPM} i
 test: 
 	$(GOTEST) -v ${TEST_PATH}
 clean: 
@@ -29,6 +30,8 @@ init:
 	${GOCMD} build
 	cd assets && ${NPM} i
 dev:
+	make submodules
+	make run-frontEnd
 	${FRESH}
 dev-css:
 	${SASS} ${SASS_DIR}:${CSS_DIR}
@@ -36,5 +39,7 @@ dev-js:
 	cd assets && sudo ${NPM} start
 run-frontEnd:
 	cd assets && sudo ${NPM} i && ${NPM} start
+submodules:
+	git submodule update --init --recursive
 
             

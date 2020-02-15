@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 
 	middleware "github.com/constraintAutomaton/nonaCard/middleware"
 	route "github.com/constraintAutomaton/nonaCard/route"
@@ -14,18 +13,20 @@ import (
 )
 
 func main() {
-	initializeFrontEnd()
 	if err := godotenv.Load(".env"); err != nil {
-		log.Print("No .env file found")
+		log.Fatal("No .env file found")
 	}
-	r := mux.NewRouter()
-	r.Use(mux.CORSMethodMiddleware(r))
+
+	r := initializeServer()
+	setRoute(r)
+
+	err := http.ListenAndServe(getPort(), r)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+func setRoute(r *mux.Router) {
 	api := r.PathPrefix("/api/v1").Subrouter()
-
-	static := r.PathPrefix("/static/")
-	fs := http.FileServer(http.Dir("assets/"))
-
-	static.Handler(http.StripPrefix("/static/", fs))
 
 	r.HandleFunc("/", route.Dashboard).Methods("GET")
 	r.HandleFunc("/login", route.Login).Methods("GET")
@@ -42,13 +43,8 @@ func main() {
 	getUser := api.PathPrefix("/user").Subrouter()
 	getUser.Use(middleware.GetUserInfoAnilist)
 	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
-
-	err := http.ListenAndServe(getPort(), r)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 }
+
 func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -60,15 +56,13 @@ func getPort() string {
 	return ":" + port
 }
 
-func initializeFrontEnd() {
-	cmd := exec.Command("git", "submodule update --init --recursive")
-	err := cmd.Run()
-	if err != nil {
-		log.Fatal(err)
-	}
-	cmd = exec.Command("make", "run-frontEnd")
-	err = cmd.Run()
-	if err != nil {
-		log.Fatal(err)
-	}
+func initializeServer() *mux.Router {
+	r := mux.NewRouter()
+	r.Use(mux.CORSMethodMiddleware(r))
+
+	static := r.PathPrefix("/static/")
+	fs := http.FileServer(http.Dir("assets/"))
+
+	static.Handler(http.StripPrefix("/static/", fs))
+	return r
 }
