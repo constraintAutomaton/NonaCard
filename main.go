@@ -12,20 +12,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main() {
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("No .env file found")
-	}
-
-	r := initializeServer()
-	setRoute(r)
-
-	err := http.ListenAndServe(getPort(), r)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
 func setRoute(r *mux.Router) {
+
 	api := r.PathPrefix("/api/v1").Subrouter()
 
 	r.HandleFunc("/", route.Dashboard).Methods("GET")
@@ -45,15 +33,18 @@ func setRoute(r *mux.Router) {
 	getUser.HandleFunc("/{user}", route.GetUser).Methods("GET")
 }
 
-func getPort() string {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-		log.Println("[-] No PORT environment variable detected. Setting to ", port)
-	} else {
-		log.Println("Starting app at ", port)
+func main() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Fatal("No .env file found")
 	}
-	return ":" + port
+
+	r := initializeServer()
+	setRoute(r)
+
+	err := http.ListenAndServe(getPort(), r)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func initializeServer() *mux.Router {
@@ -65,4 +56,15 @@ func initializeServer() *mux.Router {
 
 	static.Handler(http.StripPrefix("/static/", fs))
 	return r
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Println("[-] No PORT environment variable detected. Setting to ", port)
+	} else {
+		log.Println("Starting app at ", port)
+	}
+	return ":" + port
 }

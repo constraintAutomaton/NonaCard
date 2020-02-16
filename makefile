@@ -24,14 +24,15 @@ clean:
 	rm -f $(BINARY_NAME)
 	rm -f $(BINARY_UNIX)
 run:
+	make submodules
+	make run-frontEnd
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME)
 init:
 	${GOCMD} build
 	cd assets && ${NPM} i
 dev:
-	make submodules
-	make dev-frontEnd
+	make run-frontEnd
 	${FRESH}
 run-frontEnd:
 	cd assets && sudo ${NPM} i && ${NPM} start

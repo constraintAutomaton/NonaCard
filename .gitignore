@@ -1,5 +1,7 @@
 vendor
 tmp
-3_by_3
+nonaCard
+main
 .env
 Dockerfile
+Procfile
