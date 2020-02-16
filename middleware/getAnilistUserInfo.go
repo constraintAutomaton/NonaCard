@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/constraintAutomaton/nonaCard/pkg/clientGraphQl"
+	"github.com/constraintAutomaton/nonaCard/pkg/clientgraphql"
 	"github.com/gorilla/mux"
 )
 
@@ -19,13 +19,13 @@ func GetUserInfoAnilist(next http.Handler) http.Handler {
 			"user": vars["user"]}
 		var res UserAnilistJSON
 
-		res.getUserInfoApi(&w, &variables)
+		res.getUserInfoAPI(&w, &variables)
 		formatResponseUserAnilist(&w, &res)
 		next.ServeHTTP(w, r)
 	})
 }
-func (res *UserAnilistJSON) getUserInfoApi(w *http.ResponseWriter, variables *map[string]string) {
-	err := clientGraphQl.Fetch(urlAnilist, queryGetUserInfoAnilist, variables, &res)
+func (res *UserAnilistJSON) getUserInfoAPI(w *http.ResponseWriter, variables *map[string]string) {
+	err := clientgraphql.Fetch(urlAnilist, queryGetUserInfoAnilist, variables, &res)
 	if err != nil {
 		log.Println(err)
 		http.Error(*w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
@@ -48,8 +48,8 @@ func formatResponseUserAnilist(w *http.ResponseWriter, res *UserAnilistJSON) {
 	}
 	(*w).Header().Set("Content-Type", "text/json; application/json")
 }
-func (u UserAnilistJSON) getFormatAnilistUserInfo() FormatedAnilistUserInfo {
-	user := u.Data.User
+func (res UserAnilistJSON) getFormatAnilistUserInfo() FormatedAnilistUserInfo {
+	user := res.Data.User
 	statistics := user.Statistics.Anime
 	tags := statistics.Tags
 	formatedTag := make([]TagsFormated, len(tags))

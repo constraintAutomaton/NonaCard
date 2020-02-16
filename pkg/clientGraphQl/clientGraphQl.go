@@ -1,4 +1,4 @@
-package clientGraphQl
+package clientgraphql
 
 import (
 	"bytes"
@@ -8,10 +8,7 @@ import (
 	"net/http"
 )
 
-/**
-func Fetch(pURL string, pQuery string, pVariables map[string]string, pRepInterface *map[string]interface{}) (int, error)
-Fetch a graphQl Api
-*/
+// Fetch fetch a query to a graphQl API, return the value in the pRepInterface object that should be a pointer
 func Fetch(pURL string, pQuery string, pVariables *map[string]string, pRepInterface interface{}, pAuthorization ...string) error {
 
 	b, err := formatQuery(pQuery, pVariables)

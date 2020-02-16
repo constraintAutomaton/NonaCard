@@ -10,6 +10,8 @@ type pageSearchAnilist struct {
 type mediaSearchAnilistAnime struct {
 	Media []MediaAnilist `json:"media"`
 }
+
+// MediaAnilist information about the media query
 type MediaAnilist struct {
 	ID           int        `json:"id"`
 	IDMal        int        `json:"idMal"`

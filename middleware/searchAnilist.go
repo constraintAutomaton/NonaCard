@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/constraintAutomaton/nonaCard/pkg/clientGraphQl"
+	"github.com/constraintAutomaton/nonaCard/pkg/clientgraphql"
 )
 
 // SearchAnimeAnilist search an anime in anilist
@@ -24,7 +24,7 @@ func SearchAnimeAnilist(next http.Handler) http.Handler {
 	})
 }
 func (res *SearchAnilistJSON) getSearchQuery(w *http.ResponseWriter, variables *map[string]string) {
-	err := clientGraphQl.Fetch(urlAnilist, querySearchAnilist, variables, &res)
+	err := clientgraphql.Fetch(urlAnilist, querySearchAnilist, variables, &res)
 	if err != nil {
 		log.Println(err)
 		http.Error(*w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
