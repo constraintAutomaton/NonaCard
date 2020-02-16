@@ -40,5 +40,7 @@ dev-frontEnd:
 	cd assets && sudo ${NPM} i && ${NPM} run-script dev 
 submodules:
 	git submodule update --init --recursive
+lint:
+	fgt golint ./...
 
             
