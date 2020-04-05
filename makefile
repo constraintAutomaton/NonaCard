@@ -41,6 +41,7 @@ dev-frontEnd:
 submodules:
 	git submodule update --init --recursive
 lint:
+	go gmt ./...
 	fgt golint ./...
 
             

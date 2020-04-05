@@ -1,0 +1,11 @@
+{{template "header" .Header}}
+{{template "header-dashboard" .HeaderDashboard}}
+<section class="core">
+  <div class="empty"></div>
+  <section class="intro">
+    <div class="card-container">
+      {{range $el:=.CardIds}} {{template "card" $el}} {{end}}
+    </div>
+  </section>
+</section>
+{{template "footer" .Footer}}

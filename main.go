@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	middleware "github.com/constraintAutomaton/nonaCard/middleware"
-	route "github.com/constraintAutomaton/nonaCard/route"
+	middleware "github.com/constraintAutomaton/nonaCard/rest/middleware"
+	route "github.com/constraintAutomaton/nonaCard/rest/route"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )

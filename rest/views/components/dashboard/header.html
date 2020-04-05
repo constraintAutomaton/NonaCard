@@ -1,0 +1,18 @@
+{{define "header-dashboard"}}
+<section class="header">
+    <div class="nav">
+      <div id="button">
+        <button id="save">Save</button>
+        <button id="load">Load</button>
+      </div>
+      <div id="title-page">
+        <input id="3x3-name" value="Favorites animes"></input>
+        <span>by </span>
+        <input id="user" value="Anon"></input>
+    </div>
+    <div id="user">
+      <a href="{{.OauthLink}}"><span id="login">Login</span> </a>
+    </div>
+    </div>
+</section>
+{{end}}
