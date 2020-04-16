@@ -5,3 +5,4 @@ main
 .env
 Dockerfile
 Procfile
+/build/*

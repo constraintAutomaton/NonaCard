@@ -1,5 +1,6 @@
 package response
 
+// SearchResponse response of a search in an anime repository
 type SearchResponse struct {
 	Result []result `json:"data"`
 }

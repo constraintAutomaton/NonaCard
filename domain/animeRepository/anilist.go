@@ -1,4 +1,4 @@
-package animeRepository
+package animerepository
 
 import (
 	response "github.com/constraintAutomaton/nonaCard/domain/animeRepository/response"
@@ -7,9 +7,11 @@ import (
 
 const urlAnilist string = "https://graphql.anilist.co"
 
+// Anilist module of the anilist database
 type Anilist struct{}
 
-func (this Anilist) SearchByName(query string) (response.SearchResponse, error) {
+//SearchByName return the result of a search by name in the anilist database
+func (anilist Anilist) SearchByName(query string) (response.SearchResponse, error) {
 	variables := map[string]string{
 		"name": "query"}
 
@@ -18,10 +20,10 @@ func (this Anilist) SearchByName(query string) (response.SearchResponse, error) 
 	if err != nil {
 		return response.SearchResponse{}, err
 	}
-	return this.formatSearchResponse(&res), nil
+	return anilist.formatSearchResponse(&res), nil
 }
 
-func (this Anilist) formatSearchResponse(res *response.SearchAnilistJSON) response.SearchResponse {
+func (anilist Anilist) formatSearchResponse(res *response.SearchAnilistJSON) response.SearchResponse {
 	resFormated := response.SearchResponse{Result: res.Data.Page.Media}
 	return resFormated
 }
