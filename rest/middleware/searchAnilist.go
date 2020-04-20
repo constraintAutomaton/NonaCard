@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	graphClient "github.com/constraintAutomaton/nonaCard/rest/graphQl/client"
+	graphClient "github.com/constraintAutomaton/nonaCard/domain/communication/graphQl/client"
 )
 
 // SearchAnimeAnilist search an anime in anilist

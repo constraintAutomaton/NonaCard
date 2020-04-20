@@ -38,10 +38,10 @@ run:
 	build
 	${BUILD_PATH}/$(BINARY_NAME)
 init:
-	${GOCMD} build
+	build
 	cd assets && ${NPM} i
 dev:
-	make run-frontEnd
+	run-frontEnd
 	${FRESH}
 run-frontEnd:
 	cd assets && sudo ${NPM} i && ${NPM} start

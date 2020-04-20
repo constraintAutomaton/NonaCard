@@ -2,25 +2,27 @@ package animerepository
 
 import (
 	response "github.com/constraintAutomaton/nonaCard/domain/animeRepository/response"
-	graphClient "github.com/constraintAutomaton/nonaCard/rest/graphQl/client"
+	remoteCommunication "github.com/constraintAutomaton/nonaCard/domain/remote-communication"
 )
 
 const urlAnilist string = "https://graphql.anilist.co"
 
 // Anilist module of the anilist database
-type Anilist struct{}
+type Anilist struct {
+	remoteCommunicationModule remoteCommunication.RemoteCommuncation
+}
 
 //SearchByName return the result of a search by name in the anilist database
 func (anilist Anilist) SearchByName(query string) (response.SearchResponse, error) {
-	variables := map[string]string{
-		"name": "query"}
+	query := remoteCommunication.ParameterQuery{Url: urlAnilist,
+		Query: querySearchAnilist, Variables: map[string]string{
+			"name": "query"}, Out: response.SearchAnilistJSON{}, Authorization: make([]string, 0)}
 
-	res := response.SearchAnilistJSON{}
-	err := graphClient.Fetch(urlAnilist, querySearchAnilist, &variables, &res)
+	err := remoteCommunicationModule.Fetch(query)
 	if err != nil {
 		return response.SearchResponse{}, err
 	}
-	return anilist.formatSearchResponse(&res), nil
+	return anilist.formatSearchResponse(&query.Out), nil
 }
 
 func (anilist Anilist) formatSearchResponse(res *response.SearchAnilistJSON) response.SearchResponse {
